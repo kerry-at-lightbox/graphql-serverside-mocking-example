@@ -5,29 +5,16 @@ import {
 
 import { resolvers } from './resolvers';
 
-const typeDefs = `
-type Channel {
-  id: ID!                # "!" denotes a required field
-  name: String
-}
-# This type specifies the entry points into our API. In this case
-# there is only one - "channels" - which returns a list of channels.
-type Query {
-  channels: [Channel]    # "[]" means this is a list of channels
-}
-
-# The mutation root type, used to define all mutations.
-type Mutation {
-  # A mutation to add a new channel to the list of channels
-  addChannel(name: String!): Channel
-}
-`;
+const fs = require('fs');
+const path = require('path');
+const typeDefs = [fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf8")];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 addMockFunctionsToSchema({
     schema,
-    mocks: { String: () => 'Hello there' },
+    //mocks: { channels: () => new MockList([3, () => {}]), String: () => 'Hello there' },
+    mocks: { ID: () => 1, String: () => 'Hello there' },
     preserveResolvers: false
 });
 export { schema };

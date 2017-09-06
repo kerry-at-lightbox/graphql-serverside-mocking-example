@@ -38,4 +38,5 @@ jspm_packages
 
 # IntelliJ
 .idea/workspace.xml
+.idea/misc.xml
 
