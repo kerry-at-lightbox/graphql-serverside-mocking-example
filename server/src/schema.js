@@ -4,6 +4,7 @@ import {
 } from 'graphql-tools';
 
 import { resolvers } from './resolvers';
+import { mocks } from "./mocks"
 
 const fs = require('fs');
 const path = require('path');
@@ -13,8 +14,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 addMockFunctionsToSchema({
     schema,
-    //mocks: { channels: () => new MockList([3, () => {}]), String: () => 'Hello there' },
-    mocks: { ID: () => 1, String: () => 'Hello there' },
+    mocks: mocks,
     preserveResolvers: false
 });
 export { schema };
